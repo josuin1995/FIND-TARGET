@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>2025년 폐기물처분부담금 수시 신고자 대상조회</title>
+<style>
+  :root{
+    --bg1:#ecfdf5; --bg2:#eff6ff; --card:#fff; --ink:#0f172a; --muted:#64748b; --border:#e5e7eb;
+    --brand1:#10b981; --brand2:#0ea5a1; --brand3:#3b82f6; --ring:rgba(16,185,129,.24);
+  }
+  html { font-size: 14px; }
+  body{
+    margin:0; color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    background: radial-gradient(800px 600px at 6% -8%, var(--bg1), transparent 60%),
+                radial-gradient(700px 500px at 106% 8%, var(--bg2), transparent 60%),
+                #f8fafc;
+  }
+  .container{max-width:920px;margin:0 auto;padding:18px 12px 36px}
+  .header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .logo{width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid var(--border);display:grid;place-items:center;box-shadow:0 6px 18px rgba(16,185,129,.12)}
+  .logo img{width:26px;height:26px;object-fit:contain;border-radius:4px}
+  .org{display:flex;flex-direction:column}
+  .org .name{font-weight:800; letter-spacing:-0.01em; font-size:1rem}
+  .org .sub{font-size:.75rem; color:var(--muted)}
+  .hero{
+    border:1px solid var(--border); border-radius:14px; padding:14px 12px;
+    background: linear-gradient(135deg, rgba(16,185,129,.07), rgba(14,165,161,.07));
+    box-shadow: 0 6px 18px rgba(16,185,129,.10); position:relative; overflow:hidden;
+  }
+  .hero h1{margin:0 0 4px; font-size:1.15rem; letter-spacing:-0.015em;}
+  .hero p{margin:0; color:var(--muted); font-size:.85rem;}
+  .vine{position:absolute; right:-26px; bottom:-26px; opacity:.16}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px; box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .row{display:grid; grid-template-columns:1fr auto auto; gap:6px; align-items:center}
+  input[type="text"]{width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--border); font-size:.95rem; outline:none}
+  input[type="text"]:focus{ box-shadow:0 0 0 3px var(--ring); border-color:#86efac }
+  .btn{ padding:10px 12px; border-radius:10px; border:1px solid var(--border); background:#fff; cursor:pointer; font-weight:700; font-size:.9rem }
+  .btn-primary{ background: linear-gradient(135deg, var(--brand2), var(--brand3)); color:#fff; border-color:transparent; box-shadow:0 8px 18px rgba(59,130,246,.16) }
+  .status{ margin-top:6px; color:var(--muted); font-size:.8rem }
+  table{ width:100%; border-collapse:collapse }
+  thead th{ position:sticky; top:0; background:#f9fafb; text-align:left; padding:8px 10px; border-bottom:1px solid var(--border); font-size:.85rem }
+  tbody td{ padding:8px 10px; border-bottom:1px solid #f1f5f9; font-size:.9rem }
+  tbody tr:hover{ background:#fafafa }
+  .footer{ text-align:center; color:var(--muted); font-size:.75rem; margin-top:12px }
+  @media (max-width:560px){
+    .row{ grid-template-columns: 1fr; }
+    .btn{ width:100%; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo" aria-label="한국환경공단 로고"><img src="data:image/gif;base64,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" alt="한국환경공단 로고"/></div>
+      <div class="org"><div class="name">한국환경공단</div><div class="sub">광주전남제주환경본부 · 제도운영부</div></div>
+    </div>
+
+    <div class="hero" style="margin-bottom:10px;">
+      <h1>2025년 폐기물처분부담금 수시 신고자 대상조회</h1>
+      <p>사업자번호를 입력하면 해당 사업자에 매칭된 올바로ID와 공사명(사업장명)을 확인합니다. 하이픈 유무는 관계 없습니다.</p>
+      <svg class="vine" width="140" height="140" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 170 C 60 130, 80 120, 120 90 S 170 40, 170 10" stroke="#10b981" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="120" cy="90" r="6" fill="#10b981"/>
+        <circle cx="90" cy="120" r="4.5" fill="#0ea5a1"/>
+        <circle cx="58" cy="140" r="4" fill="#3b82f6"/>
+      </svg>
+    </div>
+
+    <div class="card" style="margin-bottom:10px;">
+      <div class="row">
+        <input id="brnInput" type="text" placeholder="사업자번호 입력 (예: 123-45-67890 또는 1234567890)" aria-label="사업자번호 입력"/>
+        <button id="btnSearch" class="btn btn-primary">조회</button>
+        <button id="btnExport" class="btn">결과 CSV 다운로드</button>
+      </div>
+      <div id="status" class="status">데이터를 불러오는 중입니다...</div>
+    </div>
+
+    <div class="card">
+      <div style="overflow-x:auto;border-radius:8px">
+        <table>
+          <thead><tr><th style="width:24%;">사업자번호</th><th style="width:22%;">올바로ID</th><th>공사명(사업장명)</th></tr></thead>
+          <tbody id="resultBody"><tr><td colspan="3" style="text-align:center;color:#94a3b8;padding:14px;">조회 결과가 여기에 표시됩니다.</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="footer">© 2025 한국환경공단 광주전남제주환경본부 제도운영부 • 내부 조회용</div>
+  </div>
+
+  <script id="seedCsv" type="text/plain">408-81-87078,030-25,(주)강산개발-2025년 소나무재선충병 예방을 위한 고사목 제거사업
+612-85-01828,KPS3005-3,"25년 광주전남 정기점검보수공사(기계,전기)"
+135-86-32331,bbg26,광주사업장 D동 2층 모터시작실 조성 건축공사
+411-83-00391,cey3331,2025년 영산강 하구 적치폐기물 처리 용역(2차)
+830-88-01863,chamsamc3,탱크청소 지정폐기물 액·고상 운반 및 처리 광주광역시 북구 임동 100-1
+407-88-02060,chb6496-7,영광전자고 관사 보수 및 급식실 샌드위치판넬 해소공사
+219-81-12623,daekun2025,광양항 율촌 융복합물류단지 조성공사중 연약지반 처리공사
+226-81-31929,dd4034,성전중 외 1교 교사동 창호교체공사
+412-83-02811,dhkdrhrrlch,*나주시청(농업정책과)-왕곡면 기초생활거점조성사업 폐기물 처리용역
+408-83-00696,dhrrhkgidry,*곡성군청-옥과향교~옥과교회간 도시계획도로 개설공사 폐기물 처리 운반 용역
+411-83-01162,dkqgoehdrkdekd1,압해동초 다목적강당 증축공사 폐기물처리용역
+411-83-03103,dkswjs2025-051,무안군청-구제역 방역차량 전도에 따른 지정 폐기물 처리용역 시행
+416-81-19926,dm157,(유)대명산업 사업장내 지정폐기물 처리 용역
+409-83-01679,dnjftks2503,월산면사무소-2025년 시설하우스 주변환경 정비사업
+415-83-00016,dudshdqntksanf12,영농부산물 안전처리 지원사업 폐기물 소각처리 용역
+409-83-01723,dydaus2503,용면사무소-2025년 시설하우스 주변환경 정비사업
+416-81-82716,eden25-1,사랑아파트 공동구 고층부 난방배관 부분 교체 긴급공사
+416-81-82716,eden25-3,사랑아파트 공동구 난방배관 부분교체-긴급공사
+409-86-13287,ehdqhr0214,화순동복중 교사 천장 보수공사
+409-83-02514,ehfhghksrud2025,도로환경 개선에 따른 폐기물 처리용역(2025)
+412-83-01898,ehtlrPghlr2024,함평군 농협중앙회 ~ 국토정보공사간(잔여구간) 가연성폐기물 처리용역
+410-86-31325,ek10162501,이케이이앤지(주)-계곡초 외 1교(옥천초) 드라이비트 제거 및 기타보수 공사
+409-83-01591,ekadid202502,	월산초 외 1교 본관동 내진보강 시설공사 가연성폐기물 처리용역
+409-83-01515,ekadid25-76,담양군청-전라남도 담양군 관내 일원
+409-83-01515,ekadidtngo,*담양군청(환경과)-담양군 수해폐기물처리용역 2차(2권역)
+411-81-19431,g1100220,몽탄초 급식실 및 관사 드라이비트 해소공사 옥토건설(주)
+409-82-12640,gidp2024,분청사기 전시실 및 가마터 보호각 보수공사
+835-81-00614,haedam78571,	버버리 신세계 광주 인테리어공사
+412-81-20270,hb-dkswhkch,안좌초 본관동 내진보강공사
+409-81-78188,hk250119,고려고등학교 고교학점제 학교공간조성 건축공사
+412-81-40562,hm2025-22,나산초 급식실 보수공사
+807-81-02131,hsb7958-1,증도~지도간 도로확포장공사 폐기물처리용역
+215-81-60458,jace8877pts,한빛2발전소 30년차 포스트텐셔닝계통 가동중검사 ((주)제이스코리아)
+412-83-05652,jdaun2,국립나주박물관 디지털 복합문화관 건립공사 건설폐기물 처리
+409-83-02794,jindocho2024,진도초 그린스마트스쿨 개축공사 가연성 폐기물 처리용역
+833-86-00501,jk20241104,"봉황농공단지길 134-10, 남도에너지(주) 나주공장"
+691-88-01180,jw1903-37,꼬두메 복합커뮤니티센터 조성사업 건축공사
+202-86-01934,jyj6024332-6,예술의전당 노후 시설물 개선 건축공사
+101-81-95610,khmgha,금호타이어(주)곡성공장
+409-86-18749,kn250509,(주)경남건설 폐유성페인트 처리
+828-87-03124,konggan2027,수완하나중 AI팩토리 (미래교실)구축공사
+416-81-52167,ksg5818,보성군 농촌 신활력플러스사업 키위 거점센터 부지 정비사업
+416-81-16782,lhw151,(광양)남측 원료-B 야드지역 환통법 대응 세륜시설 개조_토건(공사)
+411-83-00692,m20250205,목포석현초 놀이시설 개선공사 건설폐기물(소각) 처리용역-전라남도목포교육청
+416-81-13617,mb1136,(광양)2소결 Room EP Main Duct 좌굴로 인한 기능상실 복원_개산계약(돌발프로세스)
+416-81-13617,mb1144,(용역) 2025년 광양 산소공장 9Plant 불순물 흡착기 10Plant 이설 작업
+416-81-13617,mb1146,(광양)3냉연 Utility 소석회 Silo 개체 및 용해 Pit Mist 살수 자동화
+411-83-00391,mokpo3331,2025년 영산강하구 적치폐기물 처리용역-목포시청
+306-82-00471,muan2024,무안군 지방상수도 현대화사업 관망정비공사 건설폐기물 처리용역
+416-83-04844,nier3906,영산강물환경연구소 수질측정센터 증축 건축공사
+521-86-01984,nysofree25,영산강 하구둑 제2배수갑문 기전 정비작업 폐기물 처리
+413-83-00010,qhtjd2501,*보성군청(기후환경과)-2025년 생활폐기물(가연성) 위탁처리 용역(추가분)
+415-83-00016,rPrhrdnjfdka,계곡 월암 용배수로 정비공사 가연성폐기물 처리용역
+410-83-02606,rPtn2025,계수마을 공영주차장 부지 건물 철거 및 해체공사 가연성폐기물 처리용역
+611-86-02248,readmind-1,문성고등학교 실개조 건축공사
+410-82-17397,remod6-8,23년 노후 공공임대 리모델링공사 6권역 폐기물 처리용역 - 광주북구
+410-82-17397,remod6-9,23년 노후 공공임대 리모델링공사 6권역 폐기물 처리용역(가연성) - 광주광산구
+409-83-01591,rhdrh0224,담양공업고 하키장 인조잔디 교체공사
+413-83-00795,rhkdur2025,과역면 도천리 비위생매립지 정비사업 가연성폐기물(소각)처리 용역
+411-83-03103,rhksrhkd25-022,무안군청-2025년 회산백련지 상반기 임목 등 폐기물처리용역
+413-83-00795,rkdustjd2024-2,2024년 고흥군 생활폐기물(가연성폐기물) 위탁처리 용역(2차)
+413-83-00795,rkdustjd2025-2,2025년 고흥군 생활폐기물(가연성폐기물) 위탁처리 용역
+414-83-00032,rkdwls25-3,강진군청-2025년 방치폐기물 위탁 처리용역
+409-83-02514,rlatnwls1111,무등경기장 주변 주민편의시설 내진보강 및 리모델링공사 폐기물처리용역
+417-83-00031,rnjseo,광양항 3단계 투기장(1구역) 항만재개발사업 연결도로 장비엔진오일 교환 처리용역
+410-81-72414,sambaek-w02,전남농협포장재가공사업소 내 연료탱크 철거용역
+410-81-35781,sejin007060,(주)세진종합건설 함평경찰서 민원실동 건축공사
+313-86-02460,sh0246015,우치공원 유희시설(씽씽보트) 보수공사
+411-83-01162,shinan2024-97,지도초 그린스마트스쿨 본관동 개축 및 별관동 리모델링공사 가연성폐기물 처리용역
+307-81-27006,sjsj3920408,강진중 연립관사 외 1건 보수공사
+412-83-01898,skqlcvkzm2025,함평 엑스포공원 에듀테인먼트파크 조성사업 폐기물 처리 용역
+412-83-02811,skwnqkdcl2501,"*나주시청(도시미화과)-관내 방치폐기물 위탁처리(산포,남평,봉황)"
+408-81-32025,susung7,자은중 본관동 창호 교체공사
+134-87-17843,tesskorea24-1,전산실 항온항습용 노후 냉각탑 교체 폐기물처리
+410-83-00739,thdwjd5dlf,*광산구청(시민경제과)-송정5일시장 화재피해 장옥 철거 폐기물(합성수지) 용역
+417-83-00142,thqkdvh1,여수경찰서 주차동 소방포원액탱크 교체공사 중 지정폐기물 처리
+416-83-00187,tkdtkafl364,지봉로 완충녹지 지장물 철거 폐콘크리트 처리용역(해룡면 상삼리 364)
+409-81-58877,tpsehflvPdb,유한책임회사 센도리-사업장 내 폐유 운반처리
+416-83-00187,whfPehd72-55,지봉로 완충녹지 (파머스 앞) 건축물 폐콘크리트 처리 용역
+409-83-00651,wkdtjddnjftks,2025년 장성 월산마을 취약지역 생활여건개조사업 빈집 철거
+408-81-55450,wlgus202400561,금정면 아천리 18-1 폐기물처리용역
+205-82-06022,wlsdnjfxpsltm,진월테니스장 시설 개보수공사 소각폐기물 처리용역
+409-83-00520,wp202573,전남대학교 보조운동장 철거공사 폐기물처리용역(폐콘크리트)
+410-83-02606,wp25-20,기름유출로 인한 지정폐기물처리(25년)
+410-83-06112,yg2548,상하수도사업소 하수준설토 처리용역
+408-81-45535,ys20241210,서구청소년수련관외장재교체공사
+410-81-93758,aibis1111,사업장 내 지정폐기물 운반처리
+213-83-00929,gokseonghasuc,곡성상하수도사업소-곡성하수처리장폐약품처리용역
+417-81-18084,honamep1-2,순천 화포해역 갯벌생태계 복원사업
+417-81-18084,honamep10, 미사용 폐기물처리[여수 월내동 1089-22]
+408-83-00696,todghkf2912, 심청한옥마을 생활폐기물처리
+417-81-28919,ywisjh33, (주)주연산업 창고철거 공사 중 보온재 처리
+
+</script>
+  <script>
+    const $ = id => document.getElementById(id);
+    const input = $("brnInput"), btnSearch = $("btnSearch"), btnExport = $("btnExport"), tbody = $("resultBody"), statusEl = $("status");
+    let rows = []; let matches = [];
+    const norm = s => String(s||"").replace(/\D/g,"");
+
+    function safeSplit3(line){
+      let i1 = line.indexOf(",");
+      if (i1 < 0) return [line.trim(), "", ""];
+      let i2 = line.indexOf(",", i1+1);
+      if (i2 < 0) { const a = line.slice(0,i1).trim(); const b = line.slice(i1+1).trim(); return [a, b, ""]; }
+      const a = line.slice(0,i1).trim();
+      const b = line.slice(0+i1+1, i2).trim();
+      const c = line.slice(i2+1).trim();
+      return [a.replace(/^"+|"+$/g,""), b.replace(/^"+|"+$/g,""), c.replace(/^"+|"+$/g,"")];
+    }
+
+    function parseHeaderAware(text){
+      const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+      if (!lines.length) return [];
+      const first = safeSplit3(lines[0]).map(t => t.replace(/\uFEFF/g,"").trim());
+      const looksLikeData = (norm(first[0]).length >= 9) && first[1] && first[2];
+      const out = [];
+      if (looksLikeData) { // headerless
+        out.push({ brn:first[0], olbaroId:first[1], projectName:first[2], brnNorm:norm(first[0]) });
+        for (let i=1;i<lines.length;i++){ const [c1,c2,c3] = safeSplit3(lines[i]); out.push({ brn:c1, olbaroId:c2, projectName:c3, brnNorm:norm(c1) }); }
+      } else {
+        const H = first.map(h => h.toLowerCase().replace(/\s+/g,""));
+        for (let i=1;i<lines.length;i++){
+          const [c1,c2,c3] = safeSplit3(lines[i]);
+          const m = {}; m[H[0]]=c1; m[H[1]]=c2; m[H[2]]=c3;
+          const brn = m["사업자번호"] ?? m["사업자"] ?? m["brn"] ?? c1;
+          const olbaroId = m["올바로id"] ?? m["올바로id "] ?? m["올바로ID"] ?? m["올바로Id"] ?? m["id"] ?? c2;
+          const projectName = m["공사명"] ?? m["사업장명"] ?? c3;
+          out.push({ brn, olbaroId, projectName, brnNorm:norm(brn) });
+        }
+      }
+      return out.filter(r => r.brn && r.olbaroId && r.projectName);
+    }
+
+    function render(list){
+      tbody.innerHTML = "";
+      if (!list.length){ const tr=document.createElement("tr"); const td=document.createElement("td"); td.colSpan=3; td.style.textAlign="center"; td.style.color="#94a3b8"; td.style.padding="12px"; td.textContent = rows.length ? "조회 결과가 없습니다." : "데이터가 비어 있습니다."; tr.appendChild(td); tbody.appendChild(tr); return; }
+      for (const r of list){ const tr=document.createElement("tr"); const td1=document.createElement("td"); td1.textContent=r.brn; const td2=document.createElement("td"); td2.textContent=r.olbaroId; const td3=document.createElement("td"); td3.textContent=r.projectName; tr.append(td1,td2,td3); tbody.appendChild(tr); }
+    }
+
+    function doSearch(){ const key=norm(input.value); if(!key){ statusEl.textContent="사업자번호를 입력하세요."; matches=[]; render(matches); return; } matches=rows.filter(r=>r.brnNorm===key); statusEl.textContent = matches.length ? (matches.length+"건이 조회되었습니다.") : "조회 결과가 없습니다."; render(matches); }
+
+    function csvEscape(v){ const s=String(v??""); return /[",\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s; }
+    btnExport.addEventListener("click", ()=>{ if(!matches.length){ alert("다운로드할 결과가 없습니다."); return; } const header="사업자번호,올바로ID,공사명\n"; const body=matches.map(r=>[r.brn,r.olbaroId,r.projectName].map(csvEscape).join(",")).join("\n"); const blob=new Blob([header+body],{type:"text/csv;charset=utf-8;"}); const url=URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download="lookup_results.csv"; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); });
+    btnSearch.addEventListener("click", doSearch); input.addEventListener("keydown", e=>{ if(e.key==="Enter") doSearch(); });
+
+    const seed = document.getElementById("seedCsv").textContent || "";
+    if (seed.trim().length){ rows = parseHeaderAware(seed); statusEl.textContent = rows.length ? ("데이터 로드 완료 • 총 " + rows.length + "건") : "유효한 데이터가 없습니다."; render([]); } else { statusEl.textContent = "내장 데이터가 없습니다."; }
+  </script>
+</body>
+</html>
